@@ -15,6 +15,7 @@ import android.view.MenuItem;
  * a {@link GroupDetailFragment}.
  */
 public class GroupDetailActivity extends FragmentActivity
+implements GroupDetailFragment.Callbacks
 {
 
     @Override
@@ -23,6 +24,7 @@ public class GroupDetailActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_detail);
 
+        /*
         // Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -45,7 +47,7 @@ public class GroupDetailActivity extends FragmentActivity
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.group_detail_container, fragment).commit();
-        }
+        }*/
     }
 
     @Override
@@ -65,5 +67,12 @@ public class GroupDetailActivity extends FragmentActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(String id)
+    {
+        // TODO Auto-generated method stub
+        
     }
 }

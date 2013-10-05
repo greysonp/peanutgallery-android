@@ -3,10 +3,14 @@ package com.hackmit.hierogifics;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.facebook.Session;
+import com.facebook.Session.OpenRequest;
+import com.facebook.SessionState;
 import com.hackmit.hierogifics.group.GroupContent;
 
 /**
@@ -74,7 +78,7 @@ public class GroupListFragment extends ListFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+        
         // TODO: replace with a real list adapter.
         setListAdapter(new ArrayAdapter<GroupContent.GroupItem>(getActivity(),
                 android.R.layout.simple_list_item_activated_1,
@@ -161,4 +165,5 @@ public class GroupListFragment extends ListFragment
 
         mActivatedPosition = position;
     }
+        
 }
