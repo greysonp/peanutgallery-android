@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.hackmit.hierogifics.dummy.GroupContent;
+import com.hackmit.hierogifics.group.GroupContent;
 
 /**
  * A list fragment representing a list of Groups. This fragment also supports

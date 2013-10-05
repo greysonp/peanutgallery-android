@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hackmit.hierogifics.dummy.GroupContent;
+import com.hackmit.hierogifics.group.GroupContent;
 
 /**
  * A fragment representing a single Group detail screen. This fragment is either
