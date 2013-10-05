@@ -1,6 +1,7 @@
 package com.hackmit.hierogifics;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -45,17 +46,21 @@ public class GroupDetailFragment extends ListFragment
     {
         super.onCreate(savedInstanceState);
 
-        ArrayList <Page> pageList = new ArrayList<Page>();
-        //make pages here from incoming data...
-        pageList.add(new Page());
+        ArrayList <HashMap<String, String>> pageList = new ArrayList<HashMap<String, String>>();
+        for (int i = 0; i < 4; i++){
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("name", "Test Page" + i);
+            map.put("author", "Hansen Zhang");
+            map.put("comment", "This is interesting!");
+            map.put("comment_author", "not Hansen");
+            map.put("num_comments", "3" + " comments");
+            pageList.add(map);
+            }
         //notify dataset changed!!
-        //ListAdapter adapter = new SimpleAdapter(this, pageList, R.layout.page_item_list, 
-         //       new String [] {R.id.page_title, R.id.page_url, R.id.page_date, R.id.last_lauthor, R.id.last_fauthor
-          //                     R.id.current_lauthor, R.id.current_fauthor}, 
-           //     new int [] {R.id.page_name, R.id.page_, R.id.last_comment_id, R.id.current_comment_id});   
-        setListAdapter(new ArrayAdapter<Page>(getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1, pageList));
+        ListAdapter adapter = new SimpleAdapter(getActivity(), pageList, R.layout.page_item_list, 
+                new String [] {"name", "author", "comment", "comment_author", "num_comments"}, 
+                new int [] {R.id.page_name, R.id.author, R.id.comment, R.id.comment_author, R.id.num_comments});   
+        setListAdapter(adapter);
         /*
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment

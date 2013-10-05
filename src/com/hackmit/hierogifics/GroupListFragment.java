@@ -3,16 +3,20 @@ package com.hackmit.hierogifics;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.hackmit.hierogifics.group.GroupContent;
+import com.hackmit.hierogifics.json.JSONParser;
 
 /**
  * A list fragment representing a list of Groups. This fragment also supports
@@ -79,16 +83,28 @@ public class GroupListFragment extends ListFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        ArrayList<HashMap<String, String>> groupList = new ArrayList<HashMap<String, String>>();
+        /*
+        JSONParser parser = new JSONParser();
+        JSONObject json = parser.getJSONfromUrl("EMPTY FOR NOW");
         
+        try {
+            JSONArray group = json.getJSONArray("Groups"); // Likely to be incorrect.  TODO: update with new value
+            //logic for array here
+        } catch(JSONException e) {
+            
+        }
+        */
+        ArrayList<HashMap<String, String>> groupList = new ArrayList<HashMap<String, String>>();
+        for (int i = 0; i < 4; i++){
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put("name", "Test Group");
-        map.put("num_comments", "3 new comments.");
+        map.put("name", "Test Group " + i);
+        map.put("num_comments", i + " new comments.");
         groupList.add(map);
+        }
         
         ListAdapter adapter = new SimpleAdapter(getActivity(), groupList, R.layout.group_item_list, 
                 new String [] {"name", "num_comments"},
-                new int [] {R.id.text1, R.id.text2}
+                new int [] {R.id.group_name, R.id.num_comments}
                 );
         
         setListAdapter(adapter);
