@@ -25,26 +25,33 @@
             android:textColor="#acacac"
             android:paddingBottom="2dip">
         </TextView>
+
         <TextView
             android:id="@+id/comment"
-            android:layout_width="fill_parent"
+            android:layout_width="241dp"
             android:layout_height="wrap_content"
-            android:textColor="#acacac"
-            android:paddingBottom="2dip">
-        </TextView>
+            android:paddingBottom="2dip"
+            android:paddingLeft="20dp"
+            android:textColor="#acacac" />
+
         <TextView
             android:id="@+id/comment_author"
-            android:layout_width="fill_parent"
+            android:layout_width="242dp"
             android:layout_height="wrap_content"
-            android:textColor="#acacac"
-            android:paddingBottom="2dip">
+            android:paddingBottom="2dip"
+            android:paddingLeft="25dp"
+            android:textColor="#acacac" >
+
         </TextView>
+
         <TextView
             android:id="@+id/num_comments"
-            android:layout_width="fill_parent"
+            android:layout_width="241dp"
             android:layout_height="wrap_content"
-            android:textColor="#acacac"
-            android:paddingBottom="2dip">
+            android:paddingBottom="2dip"
+            android:paddingLeft="25dp"
+            android:textColor="#acacac" >
+
         </TextView>
         <!-- Linear layout for cost and price Cost: Rs.100 -->
         <LinearLayout
@@ -58,7 +65,7 @@
             android:textColor="#5d5d5d"
             android:gravity="left"
             android:textStyle="bold"
-            android:text="Mobile: " >
+            android:text="" >
         </TextView>
         <!-- Price Label -->
         <TextView

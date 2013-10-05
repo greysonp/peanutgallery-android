@@ -50,9 +50,9 @@ public class GroupDetailFragment extends ListFragment
         for (int i = 0; i < 4; i++){
             HashMap<String, String> map = new HashMap<String, String>();
             map.put("name", "Test Page" + i);
-            map.put("author", "Hansen Zhang");
+            map.put("author", "By " + "Hansen Zhang" + " on " + "10/5/13" + ".");
             map.put("comment", "This is interesting!");
-            map.put("comment_author", "not Hansen");
+            map.put("comment_author", "By " + "not Hansen" + " on " + "10/6/13" + ".");
             map.put("num_comments", "3" + " comments");
             pageList.add(map);
             }
