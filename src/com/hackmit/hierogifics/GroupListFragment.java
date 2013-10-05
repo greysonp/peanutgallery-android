@@ -1,16 +1,17 @@
 package com.hackmit.hierogifics;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
-import com.facebook.Session;
-import com.facebook.Session.OpenRequest;
-import com.facebook.SessionState;
 import com.hackmit.hierogifics.group.GroupContent;
 
 /**
@@ -78,11 +79,19 @@ public class GroupListFragment extends ListFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ArrayList<HashMap<String, String>> groupList = new ArrayList<HashMap<String, String>>();
         
-        // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<GroupContent.GroupItem>(getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1, GroupContent.ITEMS));
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("name", "Test Group");
+        map.put("num_comments", "3 new comments.");
+        groupList.add(map);
+        
+        ListAdapter adapter = new SimpleAdapter(getActivity(), groupList, R.layout.group_item_list, 
+                new String [] {"name", "num_comments"},
+                new int [] {R.id.text1, R.id.text2}
+                );
+        
+        setListAdapter(adapter);
     }
 
     @Override
@@ -166,4 +175,28 @@ public class GroupListFragment extends ListFragment
         mActivatedPosition = position;
     }
         
+    class Group{
+        int id;
+        String name;
+        int newShares;
+        //Default test constructor.
+        Group(int id) {
+            this.id = id;
+            this.name = "Hansen's group";
+            this.newShares = 0;
+        }
+        Group(int id, String name, int newShares) {
+            this.id = id;
+            this.name = name;
+            this.newShares = newShares;
+        }
+        
+        @Override
+        public String toString() {
+            return id + name + newShares; // VERY TEMPORARY
+        }
+        //Id
+        //Name        
+        //New shares
+    }
 }

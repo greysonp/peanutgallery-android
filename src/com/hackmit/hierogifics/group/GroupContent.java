@@ -30,8 +30,8 @@ public class GroupContent
     static {
         // Add all groups
         // TODO: change to adding each menu item for group.
-        for (int i = 0; i < 2; i++) {
-        addItem(new GroupItem(i + "", "Item " + i));
+        for (int i = 0; i < 6; i++) {
+        addItem(new GroupItem(i + "", "Group " + i));
 
     
         }        

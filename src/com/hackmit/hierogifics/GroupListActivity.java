@@ -55,9 +55,11 @@ public class GroupListActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.activity_group_list);
-        uiHelper = new UiLifecycleHelper(this, callback);
-        uiHelper.onCreate(savedInstanceState);
+        
+       
+        /*
         FragmentManager fm = getSupportFragmentManager();
         fragments[SPLASH] = fm.findFragmentById(R.id.splashFragment);
         fragments[SELECTION] = fm.findFragmentById(R.id.selectionFragment);
@@ -66,8 +68,14 @@ public class GroupListActivity extends FragmentActivity implements
         for(int i = 0; i < fragments.length; i++) {
             transaction.hide(fragments[i]);
         }
+        
         transaction.commit();
-     
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        uiHelper = new UiLifecycleHelper(this, callback);
+        uiHelper.onCreate(savedInstanceState);
+        */
         if (findViewById(R.id.group_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -80,7 +88,7 @@ public class GroupListActivity extends FragmentActivity implements
             ((GroupListFragment) getSupportFragmentManager().findFragmentById(
                     R.id.group_list)).setActivateOnItemClick(true);
         }
-
+        
         // TODO: If exposing deep links into your app, handle intents here.
     }
 
@@ -110,6 +118,7 @@ public class GroupListActivity extends FragmentActivity implements
             startActivity(detailIntent);
         }
     }
+    /*
     @Override
     public void onResume() {
         super.onResume();
@@ -205,4 +214,5 @@ public class GroupListActivity extends FragmentActivity implements
             onSessionStateChange(session, state, exception);
         }
     };
+    */
 }
