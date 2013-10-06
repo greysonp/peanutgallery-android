@@ -219,8 +219,8 @@ containing a value of this type.
         public static final int toast_frame=0x7f020028;
     }
     public static final class id {
-        public static final int SelectionFragment=0x7f04001f;
-        public static final int author=0x7f040023;
+        public static final int SelectionFragment=0x7f040020;
+        public static final int author=0x7f040024;
         public static final int com_facebook_login_activity_progress_bar=0x7f040008;
         public static final int com_facebook_picker_activity_circle=0x7f040007;
         public static final int com_facebook_picker_checkbox=0x7f04000a;
@@ -241,27 +241,27 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_login_button=0x7f04001a;
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f040018;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f040019;
-        public static final int comment=0x7f040024;
-        public static final int comment_author=0x7f040025;
+        public static final int comment=0x7f040025;
+        public static final int comment_author=0x7f040026;
         public static final int group_detail=0x7f04001b;
         public static final int group_detail_container=0x7f040003;
         public static final int group_list=0x7f040004;
         public static final int group_name=0x7f04001d;
+        public static final int hidden_value=0x7f04001f;
         public static final int large=0x7f040002;
         public static final int link_detail=0x7f04001c;
         public static final int link_detail_container=0x7f040005;
         public static final int login_button=0x7f04002a;
-        public static final int mobile=0x7f040026;
         public static final int normal=0x7f040001;
         public static final int num_comments=0x7f04001e;
-        public static final int page_name=0x7f040022;
+        public static final int page_name=0x7f040023;
         public static final int picker_subtitle=0x7f040015;
         public static final int profile_name=0x7f040029;
         public static final int selectionFragment=0x7f040027;
         public static final int small=0x7f040000;
-        public static final int splashFragment=0x7f040020;
+        public static final int splashFragment=0x7f040021;
         public static final int splash_icon=0x7f040028;
-        public static final int userSettingsFragment=0x7f040021;
+        public static final int userSettingsFragment=0x7f040022;
     }
     public static final class layout {
         public static final int activity_group_detail=0x7f030000;

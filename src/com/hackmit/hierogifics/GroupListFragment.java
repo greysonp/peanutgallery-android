@@ -86,9 +86,6 @@ public class GroupListFragment extends ListFragment implements JSONParser.JSONPa
         
         JSONParser parser = new JSONParser(this);
         parser.execute("http://whispering-sierra-9270.herokuapp.com/?getGroups=562093799");
-        //JSONObject json = parser.getJSONfromUrl();
-        
-        
     }
 
     @Override
@@ -135,7 +132,10 @@ public class GroupListFragment extends ListFragment implements JSONParser.JSONPa
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(GroupContent.ITEMS.get(position).id);
+        @SuppressWarnings("unchecked")
+        HashMap<String,String> gimmeId = (HashMap<String, String>) listView.getItemAtPosition(position);
+        System.err.println("Good question..." + gimmeId.get("id"));
+        mCallbacks.onItemSelected(gimmeId.get("id"));
     }
 
     @Override
@@ -171,31 +171,6 @@ public class GroupListFragment extends ListFragment implements JSONParser.JSONPa
 
         mActivatedPosition = position;
     }
-        
-    class Group{
-        int id;
-        String name;
-        int newShares;
-        //Default test constructor.
-        Group(int id) {
-            this.id = id;
-            this.name = "Hansen's group";
-            this.newShares = 0;
-        }
-        Group(int id, String name, int newShares) {
-            this.id = id;
-            this.name = name;
-            this.newShares = newShares;
-        }
-        
-        @Override
-        public String toString() {
-            return id + name + newShares; // VERY TEMPORARY
-        }
-        //Id
-        //Name        
-        //New shares
-    }
 
     @Override
     public void showList(JSONObject result)
@@ -212,6 +187,7 @@ public class GroupListFragment extends ListFragment implements JSONParser.JSONPa
                 String newShares = g.getString("newShares");
                 
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put("id", id);
                 map.put("name", name);
                 map.put("newShares", newShares + " new comments.");
                 groupList.add(map);
@@ -219,9 +195,10 @@ public class GroupListFragment extends ListFragment implements JSONParser.JSONPa
         } catch(JSONException e) {
             
         }
+        
         ListAdapter adapter = new SimpleAdapter(getActivity(), groupList, R.layout.group_item_list, 
-                new String [] {"name", "newShares"},
-                new int [] {R.id.group_name, R.id.num_comments}
+                new String [] {"id","name", "newShares"},
+                new int [] {R.id.hidden_value, R.id.group_name, R.id.num_comments}
                 );
         
         setListAdapter(adapter);

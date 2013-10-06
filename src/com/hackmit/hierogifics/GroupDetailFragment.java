@@ -3,6 +3,10 @@ package com.hackmit.hierogifics;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -14,16 +18,19 @@ import android.widget.SimpleAdapter;
 
 import com.hackmit.hierogifics.GroupListFragment.Callbacks;
 import com.hackmit.hierogifics.group.GroupContent;
+import com.hackmit.hierogifics.json.JSONParser;
+import com.hackmit.hierogifics.json.JSONParser.JSONParserCallback;
 
 /**
  * A fragment representing a single Group detail screen. This fragment is either
  * contained in a {@link GroupListActivity} in two-pane mode (on tablets) or a
  * {@link GroupDetailActivity} on handsets.
  */
-public class GroupDetailFragment extends ListFragment
+public class GroupDetailFragment extends ListFragment implements JSONParserCallback
 {
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     private int mActivatedPosition = ListView.INVALID_POSITION;
+    private String mGroup = ""; 
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -44,32 +51,21 @@ public class GroupDetailFragment extends ListFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        ArrayList <HashMap<String, String>> pageList = new ArrayList<HashMap<String, String>>();
-        for (int i = 0; i < 4; i++){
-            HashMap<String, String> map = new HashMap<String, String>();
-            map.put("name", "Test Page" + i);
-            map.put("author", "By " + "Hansen Zhang" + " on " + "10/5/13" + ".");
-            map.put("comment", "This is interesting!");
-            map.put("comment_author", "By " + "not Hansen" + " on " + "10/6/13" + ".");
-            map.put("num_comments", "3" + " comments");
-            pageList.add(map);
+        
+        mGroup = "523462641001709";
+        
+        String url = "http://whispering-sierra-9270.herokuapp.com/?getPages=";
+        if (mGroup.equals("")) {
+            //noGroupsFound();
+        } else {
+            JSONParser parser = new JSONParser(this);
+            try {
+                parser.execute(url + mGroup);
+            } catch (Exception e) {
+                //noGroupsFound();
             }
-        //notify dataset changed!!
-        ListAdapter adapter = new SimpleAdapter(getActivity(), pageList, R.layout.page_item_list, 
-                new String [] {"name", "author", "comment", "comment_author", "num_comments"}, 
-                new int [] {R.id.page_name, R.id.author, R.id.comment, R.id.comment_author, R.id.num_comments});   
-        setListAdapter(adapter);
-        /*
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            
-            //load content from ARG_ITEM_ID
-            mItem = GroupContent.ITEM_MAP.get(getArguments().getString(
-                    ARG_ITEM_ID));
-        } */
+        }
+        
     }
 
     public interface Callbacks
@@ -173,56 +169,71 @@ public class GroupDetailFragment extends ListFragment
 
         mActivatedPosition = position;
     }
-    /*
+    
+    
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState)
+    public void showList(JSONObject result)
     {
-        View rootView = inflater.inflate(R.layout.fragment_group_detail,
-                container, false);
-
-        // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.group_detail))
-                    .setText(mItem.content);
-        }
-
-        return rootView;
-    }
-    */
-    class Page {
-        int id;
-        String title;
-        String url;
-        String date; // for now?        
-        int commentCount; //number of comments
-        Author aPage;
+        ArrayList <HashMap<String, String>> pageList = new ArrayList<HashMap<String, String>>();
+        try {
+            JSONArray pages = result.getJSONArray("pages");
         
-        Page() {
+            for (int i = 0; i < pages.length(); i++){
             
-        }
-        Page(int i, String title, String url, String date, int cNum, Author a) {
+            JSONObject p = pages.getJSONObject(i);
             
-        }
-               
-        //last comment {}
-        class LastComment{
-            String body;
-            String date; // for now
-            Author aComment;
-            LastComment() {
-                
+            String id = p.getString("id");
+            String title = p.getString("title");
+            String url = p.getString("url");
+            String create_date = p.getString("date");
+            String numComments = p.getString("numComments");
+            //JSONArray last_comment = p.getJSONArray("lastComment");
+            //JSONArray author = p.getJSONArray("author");
+            //String author_id = author.getString(0);
+            //String author_firstname = author.getString(1);
+            //String author_lastname = author.getString(2);
+            
+            //String comment_body = last_comment.getString(0);                        
+            //String last_date = last_comment.getString(1);
+            //JSONArray last_author = last_comment.getJSONArray(2);
+            //String comment_firstname = last_author.getString(0);
+            //String comment_lastname = last_author.getString(1);
+            
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("title", title);
+            map.put("author", "By " + " " + " on " + create_date + ".");
+            //map.put("author", "By " + author_firstname + " " + author_lastname + " on " + create_date + ".");
+map.put("comment", "");            //map.put("comment", comment_body + "");
+map.put("comment_author", "");
+            //map.put("comment_author", "By " + comment_firstname + " " + comment_lastname + " on " + last_date + ".");
+            map.put("num_comments", numComments + " comments");
+            pageList.add(map);
             }
-        }
-        class Author {
-            int id;
-            String firstname;
-            String lastname;
-            Author() {
-                
-            }
-        }
-              
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+        
+        //notify dataset changed!!
+        ListAdapter adapter = new SimpleAdapter(getActivity(), pageList, R.layout.page_item_list, 
+                new String [] {"title", "author", "comment", "comment_author", "num_comments"}, 
+                new int [] {R.id.page_name, R.id.author, R.id.comment, R.id.comment_author, R.id.num_comments});   
+        setListAdapter(adapter);
+    }
+    
+    void noGroupsFound() {
+        ArrayList <HashMap<String, String>> pageList = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("title", "Nothing found here...");
+        map.put("author", "");
+        map.put("comment", "");
+        map.put("comment_author", "");
+        map.put("num_comments", "");
+        pageList.add(map);
+        ListAdapter adapter = new SimpleAdapter(getActivity(), pageList, R.layout.page_item_list, 
+                new String [] {"title", "author", "comment", "comment_author", "num_comments"}, 
+                new int [] {R.id.page_name, R.id.author, R.id.comment, R.id.comment_author, R.id.num_comments});   
+        setListAdapter(adapter);
     }
     
 }

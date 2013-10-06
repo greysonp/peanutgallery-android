@@ -46,7 +46,7 @@ implements GroupDetailFragment.Callbacks
             arguments.putString(GroupDetailFragment.ARG_ITEM_ID, getIntent()
                     .getStringExtra(GroupDetailFragment.ARG_ITEM_ID));
             GroupDetailFragment fragment = new GroupDetailFragment();
-            fragment.setArguments(arguments);
+            fragment.setArguments(arguments);            
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.group_detail_container, fragment).commit();
         }

@@ -60,29 +60,6 @@
 
         </TextView>
         <!-- Linear layout for cost and price Cost: Rs.100 -->
-        <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <!-- Cost Label -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#5d5d5d"
-            android:gravity="left"
-            android:textStyle="bold"
-            android:text="" >
-        </TextView>
-        <!-- Price Label -->
-        <TextView
-            android:id="@+id/mobile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#acacac" 
-            android:textStyle="bold"
-            android:gravity="left">
-        </TextView>
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

@@ -5,15 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,7 +27,7 @@ public class JSONParser extends AsyncTask <String, Void, JSONObject>
     public JSONParser(JSONParserCallback callback) {
         mCallback =  callback;
     }    
-    /* See (wherever)*/
+    
     static InputStream is = null;
     JSONObject jObj = null;
     static String json = "";
@@ -114,8 +111,6 @@ public class JSONParser extends AsyncTask <String, Void, JSONObject>
     @Override
     protected JSONObject doInBackground(String... params)
     {
-        // TODO Auto-generated method stub
-        
         return getJSONfromUrl(params[0]);
     }
     
