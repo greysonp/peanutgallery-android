@@ -20,10 +20,10 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class JSONParser extends AsyncTask <String, Void, ArrayList<HashMap<String, String>>>
+public class JSONParser extends AsyncTask <String, Void, JSONObject>
 {   
     public interface JSONParserCallback {         
-        void showList(ArrayList<HashMap<String, String>> result);     
+        void showList(JSONObject result);     
     } 
     
     private JSONParserCallback mCallback;
@@ -112,32 +112,15 @@ public class JSONParser extends AsyncTask <String, Void, ArrayList<HashMap<Strin
     
     
     @Override
-    protected ArrayList<HashMap<String, String>> doInBackground(String... params)
+    protected JSONObject doInBackground(String... params)
     {
         // TODO Auto-generated method stub
-        ArrayList<HashMap<String, String>> groupList = new ArrayList<HashMap<String, String>>();
-        try {            
-            JSONArray groups = getJSONfromUrl(params[0]).getJSONArray("groups"); // Likely to be incorrect.  TODO: update with new value
-            //logic for array here
-            for (int i = 0; i < groups.length(); i++) {
-                JSONObject g = groups.getJSONObject(i);
-                String id = g.getString("id");
-                String name = g.getString("name");
-                String newShares = g.getString("newShares");
-                
-                HashMap<String, String> map = new HashMap<String, String>();
-                map.put("name", name);
-                map.put("newShares", newShares + " new comments.");
-                groupList.add(map);
-            }
-        } catch(JSONException e) {
-            
-        }
-        return groupList;
+        
+        return getJSONfromUrl(params[0]);
     }
     
     @Override
-    protected void onPostExecute(ArrayList<HashMap<String, String>> result) {
+    protected void onPostExecute(JSONObject result) {
         mCallback.showList(result);
     }
     

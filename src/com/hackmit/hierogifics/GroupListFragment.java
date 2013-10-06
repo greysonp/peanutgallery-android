@@ -198,9 +198,28 @@ public class GroupListFragment extends ListFragment implements JSONParser.JSONPa
     }
 
     @Override
-    public void showList(ArrayList<HashMap<String, String>> result)
+    public void showList(JSONObject result)
     {              
-        ListAdapter adapter = new SimpleAdapter(getActivity(), result, R.layout.group_item_list, 
+        
+        ArrayList<HashMap<String, String>> groupList = new ArrayList<HashMap<String, String>>();
+        try {            
+            JSONArray groups = result.getJSONArray("groups"); // Likely to be incorrect.  TODO: update with new value
+            //logic for array here
+            for (int i = 0; i < groups.length(); i++) {
+                JSONObject g = groups.getJSONObject(i);
+                String id = g.getString("id");
+                String name = g.getString("name");
+                String newShares = g.getString("newShares");
+                
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("name", name);
+                map.put("newShares", newShares + " new comments.");
+                groupList.add(map);
+            }
+        } catch(JSONException e) {
+            
+        }
+        ListAdapter adapter = new SimpleAdapter(getActivity(), groupList, R.layout.group_item_list, 
                 new String [] {"name", "newShares"},
                 new int [] {R.id.group_name, R.id.num_comments}
                 );
