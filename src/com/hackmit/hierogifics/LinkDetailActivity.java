@@ -17,25 +17,7 @@ public class LinkDetailActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        /*
-        ScrollView sv = new ScrollView(this);
-        LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
-        sv.addView(ll);
         
-        
-        TextView link = new TextView(this);
-        link.setText("LINK will go here");
-        ll.addView(link);
-        
-        EditText newComment = new EditText(this);
-        newComment.setText("Write a message");
-        ll.addView(newComment);
-        Button b = new Button(this);
-        b.setText("Submit");
-        ll.addView(b);
-        setContentView(sv);
-        */
         setContentView(R.layout.activity_link_detail);
 
         // Show the Up button in the action bar.
@@ -76,7 +58,7 @@ public class LinkDetailActivity extends FragmentActivity
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
             NavUtils.navigateUpTo(this, new Intent(this,
-                    LinkDetailActivity.class));
+                    GroupDetailActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

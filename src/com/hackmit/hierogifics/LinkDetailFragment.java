@@ -48,24 +48,7 @@ public class LinkDetailFragment extends Fragment
             
             
         }
-        /*
-        ScrollView sv = new ScrollView(getActivity());
-        LinearLayout ll = new LinearLayout(getActivity());
-        ll.setOrientation(LinearLayout.VERTICAL);
-        sv.addView(ll);
         
-        
-        TextView link = new TextView(getActivity());
-        link.setText("LINK will go here");
-        ll.addView(link);
-        
-        EditText newComment = new EditText(getActivity());
-        newComment.setText("Write a message");
-        ll.addView(newComment);
-        Button b = new Button(getActivity());
-        b.setText("Submit");
-        ll.addView(b);
-        getActivity().setContentView(sv);       */ 
     }
 
     
@@ -73,6 +56,7 @@ public class LinkDetailFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState)
     {
+        /*
         View rootView = inflater.inflate(R.layout.fragment_link_detail,
                 container, false);
 
@@ -81,8 +65,49 @@ public class LinkDetailFragment extends Fragment
             ((TextView) rootView.findViewById(R.id.group_detail))
                     .setText(mItem.content);
         }
-
-        return rootView;
+        
+        */
+        
+        
+        ScrollView sv = new ScrollView(getActivity());
+        
+        LinearLayout ll = new LinearLayout(getActivity());
+        ll.setOrientation(LinearLayout.VERTICAL);
+        sv.addView(ll);
+        
+        
+        TextView link = new TextView(getActivity());
+        link.setText("LINK will go here");
+        
+        ll.addView(link);
+        
+        TextView comment = new TextView(getActivity());
+        comment.setText("VERY LONG fasd;falwej;gaewligkewglihkal;wfjwaek;fhlwahg;waehgew;algjalw;ekj l;jlja;lefhw k Comment block");
+        comment.setPadding(30, 10, 10, 50);
+        ll.addView(comment);
+        
+        TextView comment2 = new TextView(getActivity());
+        comment2.setText("SECONDLONG fasd;falwej;gaewligkewglihkal;wfjwaek;fhlwahg;waehgew;algjalw;ekj l;jlja;lefhw k Comment block");
+        comment2.setPadding(30, 10, 10, 50);
+        ll.addView(comment2);
+        
+        /*
+         for each(comment in comment array) 
+           create new text view
+           
+         */
+        
+        EditText newComment = new EditText(getActivity());
+        newComment.setText("Write a message");
+        ll.addView(newComment);
+        Button b = new Button(getActivity());
+        b.setText("Submit");
+        ll.addView(b);
+        //getActivity().setContentView(sv);
+        sv.invalidate(); 
+        sv.requestLayout(); 
+        
+        return sv;
     }
     
 }
