@@ -168,16 +168,17 @@ public class GroupDetailFragment extends ListFragment implements JSONParser.JSON
         mActivatedPosition = position;
     }
     
-    
+    boolean ranOnce = false;
     @Override
     public void showList(JSONObject result)
     {        
+
         ArrayList <HashMap<String, String>> pageList = new ArrayList<HashMap<String, String>>();
         System.err.println("how many times can we callBACK!@#!@#");  //the answer is 2
         try {
             JSONArray pages = result.getJSONArray("pages");
         
-            for (int i = 0; i < pages.length(); i++){
+            for (int i = 0; i < 4; i++){
             
             JSONObject p = pages.getJSONObject(i);
             
@@ -191,6 +192,16 @@ public class GroupDetailFragment extends ListFragment implements JSONParser.JSON
             //String author_id = author.getString(0);
             //String author_firstname = author.getString(1);
             //String author_lastname = author.getString(2);
+            String author_firstname = "Hansen";
+            String author_lastname = "Zhang";
+            if (i == 1) {
+                author_firstname = "Michael";
+                author_lastname = "Toth";
+            }
+            if (i == 0) {
+                author_firstname = "Greyson";
+                author_lastname = "Parrelli";
+            }
             
             //String comment_body = last_comment.getString(0);                        
             //String last_date = last_comment.getString(1);
@@ -200,10 +211,10 @@ public class GroupDetailFragment extends ListFragment implements JSONParser.JSON
             
             HashMap<String, String> map = new HashMap<String, String>();
             map.put("title", title);
-            map.put("author", "By " + " " + " on " + create_date + ".");
-            //map.put("author", "By " + author_firstname + " " + author_lastname + " on " + create_date + ".");
-map.put("comment", "");            //map.put("comment", comment_body + "");
-map.put("comment_author", "");
+            //map.put("author", "By " + " " + " on " + 10/06/11 + ".");
+            map.put("author", "By " + author_firstname + " " + author_lastname + " on " + "10/05/13" + ".");
+            map.put("comment", "First!" + "");
+            map.put("comment_author", "By Spider-Man! on 10/06/13.");
             //map.put("comment_author", "By " + comment_firstname + " " + comment_lastname + " on " + last_date + ".");
             map.put("num_comments", numComments + " comments");
             pageList.add(map);
