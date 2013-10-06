@@ -1,13 +1,18 @@
 package com.hackmit.hierogifics;
 
-import com.hackmit.hierogifics.group.GroupContent;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.hackmit.hierogifics.group.GroupContent;
 
 public class LinkDetailFragment extends Fragment
 {
@@ -34,16 +39,36 @@ public class LinkDetailFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+        
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = GroupContent.ITEM_MAP.get(getArguments().getString(
-                    ARG_ITEM_ID));
+            //THIS NEEDS TO LOAD SOMETHING
+            
+            
         }
+        /*
+        ScrollView sv = new ScrollView(getActivity());
+        LinearLayout ll = new LinearLayout(getActivity());
+        ll.setOrientation(LinearLayout.VERTICAL);
+        sv.addView(ll);
+        
+        
+        TextView link = new TextView(getActivity());
+        link.setText("LINK will go here");
+        ll.addView(link);
+        
+        EditText newComment = new EditText(getActivity());
+        newComment.setText("Write a message");
+        ll.addView(newComment);
+        Button b = new Button(getActivity());
+        b.setText("Submit");
+        ll.addView(b);
+        getActivity().setContentView(sv);       */ 
     }
 
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState)

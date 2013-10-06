@@ -32,6 +32,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GroupListActivity" />
         </activity>
+        <activity
+            android:name="com.hackmit.hierogifics.LinkDetailActivity"
+            android:label="@string/title_link_detail"
+            android:parentActivityName="GroupDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GroupDetailActivity" />
+            </activity>
+        
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
     </application>
 

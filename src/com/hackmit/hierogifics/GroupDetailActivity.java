@@ -18,13 +18,15 @@ public class GroupDetailActivity extends FragmentActivity
 implements GroupDetailFragment.Callbacks
 {
 
+    private boolean mTwoPane;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_detail);
 
-        /*
+        
         // Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -47,7 +49,20 @@ implements GroupDetailFragment.Callbacks
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.group_detail_container, fragment).commit();
-        }*/
+        }
+        
+        if (findViewById(R.id.link_detail_container) != null) {
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-large and
+            // res/values-sw600dp). If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true;
+
+            // In two-pane mode, list items should be given the
+            // 'activated' state when touched.
+            ((GroupListFragment) getSupportFragmentManager().findFragmentById(
+                    R.id.group_detail_container)).setActivateOnItemClick(true);
+        }
     }
 
     @Override
@@ -72,7 +87,24 @@ implements GroupDetailFragment.Callbacks
     @Override
     public void onItemSelected(String id)
     {
-        // TODO Auto-generated method stub
-        
+        if (mTwoPane) {
+            // In two-pane mode, show the detail view in this activity by
+            // adding or replacing the detail fragment using a
+            // fragment transaction.
+            Bundle arguments = new Bundle();
+            arguments.putString(LinkDetailFragment.ARG_ITEM_ID, id);
+            LinkDetailFragment fragment = new LinkDetailFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.link_detail_container, fragment).commit();
+
+        } else {
+            // In single-pane mode, simply start the detail activity
+            // for the selected item ID.
+            System.out.println("Registering click");
+            Intent detailIntent = new Intent(this, LinkDetailActivity.class);
+            detailIntent.putExtra(LinkDetailFragment.ARG_ITEM_ID, id);
+            startActivity(detailIntent);
+        }
     }
 }

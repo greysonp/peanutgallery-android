@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class LinkDetailActivity extends FragmentActivity
 {
@@ -12,6 +17,25 @@ public class LinkDetailActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        /*
+        ScrollView sv = new ScrollView(this);
+        LinearLayout ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        sv.addView(ll);
+        
+        
+        TextView link = new TextView(this);
+        link.setText("LINK will go here");
+        ll.addView(link);
+        
+        EditText newComment = new EditText(this);
+        newComment.setText("Write a message");
+        ll.addView(newComment);
+        Button b = new Button(this);
+        b.setText("Submit");
+        ll.addView(b);
+        setContentView(sv);
+        */
         setContentView(R.layout.activity_link_detail);
 
         // Show the Up button in the action bar.
@@ -30,9 +54,9 @@ public class LinkDetailActivity extends FragmentActivity
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(GroupDetailFragment.ARG_ITEM_ID, getIntent()
-                    .getStringExtra(GroupDetailFragment.ARG_ITEM_ID));
-            GroupDetailFragment fragment = new GroupDetailFragment();
+            arguments.putString(LinkDetailFragment.ARG_ITEM_ID, getIntent()
+                    .getStringExtra(LinkDetailFragment.ARG_ITEM_ID));
+            LinkDetailFragment fragment = new LinkDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.link_detail_container, fragment).commit();
@@ -52,7 +76,7 @@ public class LinkDetailActivity extends FragmentActivity
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
             NavUtils.navigateUpTo(this, new Intent(this,
-                    GroupDetailActivity.class));
+                    LinkDetailActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
