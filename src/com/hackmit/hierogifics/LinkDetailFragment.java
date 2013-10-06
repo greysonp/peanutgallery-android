@@ -1,16 +1,13 @@
 package com.hackmit.hierogifics;
 
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -79,7 +76,7 @@ public class LinkDetailFragment extends Fragment
         
         
         TextView link = new TextView(getActivity());
-        link.setText("LINK will go here");
+        link.setText("http://www.reddit.com/");
         link.setClickable(true);
         link.setGravity(1);
         link.setPadding(0, 80, 120, 0);
@@ -89,9 +86,9 @@ public class LinkDetailFragment extends Fragment
         
         // For each comment....
         TextView comment = new TextView(getActivity());
-        comment.setText("VERY LONG fasd;falwej;gaewligkewglihkal;wfjwaek;fhlwahg;waehgew;algjalw;ekj l;jlja;lefhw k Comment block");
-        comment.setPadding(150, 25, 25, 150);
-        
+        comment.setText("This is a sample comment.");
+        comment.setPadding(150, 40, 25, 150);
+        comment.setTextColor(Color.parseColor("#FFFFFF"));
         comment.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         comment.setBackground(getResources().getDrawable(R.drawable.toast_frame));
         
@@ -99,8 +96,11 @@ public class LinkDetailFragment extends Fragment
         ll.addView(comment);
         
         TextView comment2 = new TextView(getActivity());
-        comment2.setText("SECONDLONG fasd;falwej;gaewligkewglihkal;wfjwaek;fhlwahg;waehgew;algjalw;ekj l;jlja;lefhw k Comment block");
-        comment2.setPadding(30, 10, 10, 50);
+        comment2.setText("Here's another one!");
+        comment2.setPadding(150, 40, 25, 150);
+        comment2.setTextColor(Color.parseColor("#FFFFFF"));
+        comment2.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        comment2.setBackground(getResources().getDrawable(R.drawable.toast_frame));
         ll.addView(comment2);
         
         /*

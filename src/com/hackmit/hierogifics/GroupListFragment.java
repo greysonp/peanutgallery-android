@@ -15,7 +15,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.hackmit.hierogifics.group.GroupContent;
 import com.hackmit.hierogifics.json.JSONParser;
 
 /**

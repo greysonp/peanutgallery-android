@@ -16,17 +16,15 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.hackmit.hierogifics.GroupListFragment.Callbacks;
 import com.hackmit.hierogifics.group.GroupContent;
 import com.hackmit.hierogifics.json.JSONParser;
-import com.hackmit.hierogifics.json.JSONParser.JSONParserCallback;
 
 /**
  * A fragment representing a single Group detail screen. This fragment is either
  * contained in a {@link GroupListActivity} in two-pane mode (on tablets) or a
  * {@link GroupDetailActivity} on handsets.
  */
-public class GroupDetailFragment extends ListFragment implements JSONParserCallback
+public class GroupDetailFragment extends ListFragment implements JSONParser.JSONParserCallback
 {
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     private int mActivatedPosition = ListView.INVALID_POSITION;
@@ -38,7 +36,13 @@ public class GroupDetailFragment extends ListFragment implements JSONParserCallb
     public static final String ARG_ITEM_ID = "item_id";
     
     private Callbacks mCallbacks = sGroupCallbacks;
-
+    public interface Callbacks
+    {
+        /**
+         * Callback for when an item has been selected.
+         */
+        public void onItemSelected(String id);
+    }
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -51,7 +55,7 @@ public class GroupDetailFragment extends ListFragment implements JSONParserCallb
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        
+        //Ignore the hard code....
         mGroup = "523462641001709";
         
         String url = "http://whispering-sierra-9270.herokuapp.com/?getPages=";
@@ -68,13 +72,7 @@ public class GroupDetailFragment extends ListFragment implements JSONParserCallb
         
     }
 
-    public interface Callbacks
-    {
-        /**
-         * Callback for when an item has been selected.
-         */
-        public void onItemSelected(String id);
-    }
+   
 
     /**
      * A dummy implementation of the {@link Callbacks} interface that does
@@ -173,8 +171,9 @@ public class GroupDetailFragment extends ListFragment implements JSONParserCallb
     
     @Override
     public void showList(JSONObject result)
-    {
+    {        
         ArrayList <HashMap<String, String>> pageList = new ArrayList<HashMap<String, String>>();
+        System.err.println("how many times can we callBACK!@#!@#");  //the answer is 2
         try {
             JSONArray pages = result.getJSONArray("pages");
         
@@ -210,30 +209,13 @@ map.put("comment_author", "");
             pageList.add(map);
             }
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } 
         
-        //notify dataset changed!!
         ListAdapter adapter = new SimpleAdapter(getActivity(), pageList, R.layout.page_item_list, 
                 new String [] {"title", "author", "comment", "comment_author", "num_comments"}, 
-                new int [] {R.id.page_name, R.id.author, R.id.comment, R.id.comment_author, R.id.num_comments});   
+                new int [] {R.id.page_name, R.id.author, R.id.comment, R.id.comment_author, R.id.num_comments});
         setListAdapter(adapter);
+        
     }
-    
-    void noGroupsFound() {
-        ArrayList <HashMap<String, String>> pageList = new ArrayList<HashMap<String, String>>();
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("title", "Nothing found here...");
-        map.put("author", "");
-        map.put("comment", "");
-        map.put("comment_author", "");
-        map.put("num_comments", "");
-        pageList.add(map);
-        ListAdapter adapter = new SimpleAdapter(getActivity(), pageList, R.layout.page_item_list, 
-                new String [] {"title", "author", "comment", "comment_author", "num_comments"}, 
-                new int [] {R.id.page_name, R.id.author, R.id.comment, R.id.comment_author, R.id.num_comments});   
-        setListAdapter(adapter);
-    }
-    
 }
