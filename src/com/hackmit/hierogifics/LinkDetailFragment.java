@@ -1,11 +1,14 @@
 package com.hackmit.hierogifics;
 
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,7 +29,7 @@ public class LinkDetailFragment extends Fragment
      * The dummy content this fragment is presenting.
      */
     private GroupContent.GroupItem mItem;
-
+    private String url = "";
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -52,7 +55,6 @@ public class LinkDetailFragment extends Fragment
     }
 
     
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState)
     {
@@ -78,12 +80,22 @@ public class LinkDetailFragment extends Fragment
         
         TextView link = new TextView(getActivity());
         link.setText("LINK will go here");
-        
+        link.setClickable(true);
+        link.setGravity(1);
+        link.setPadding(0, 80, 120, 0);
+        link.setTextSize(18);
+        //link.setTextAppearance(context, resid);
         ll.addView(link);
         
+        // For each comment....
         TextView comment = new TextView(getActivity());
         comment.setText("VERY LONG fasd;falwej;gaewligkewglihkal;wfjwaek;fhlwahg;waehgew;algjalw;ekj l;jlja;lefhw k Comment block");
-        comment.setPadding(30, 10, 10, 50);
+        comment.setPadding(150, 25, 25, 150);
+        
+        comment.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        comment.setBackground(getResources().getDrawable(R.drawable.toast_frame));
+        
+        
         ll.addView(comment);
         
         TextView comment2 = new TextView(getActivity());
@@ -96,13 +108,14 @@ public class LinkDetailFragment extends Fragment
            create new text view
            
          */
-        
+        /*
         EditText newComment = new EditText(getActivity());
         newComment.setText("Write a message");
         ll.addView(newComment);
         Button b = new Button(getActivity());
         b.setText("Submit");
         ll.addView(b);
+        */
         //getActivity().setContentView(sv);
         sv.invalidate(); 
         sv.requestLayout(); 

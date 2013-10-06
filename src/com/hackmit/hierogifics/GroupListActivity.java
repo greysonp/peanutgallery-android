@@ -57,7 +57,7 @@ public class GroupListActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_group_list);
-        
+       
        
         /*
         FragmentManager fm = getSupportFragmentManager();
@@ -116,6 +116,7 @@ public class GroupListActivity extends FragmentActivity implements
             Intent detailIntent = new Intent(this, GroupDetailActivity.class);
             detailIntent.putExtra(GroupDetailFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
+
         }
     }
     /*

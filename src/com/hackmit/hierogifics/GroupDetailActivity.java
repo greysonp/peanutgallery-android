@@ -103,7 +103,7 @@ implements GroupDetailFragment.Callbacks
             // for the selected item ID.
             System.out.println("Registering click");
             Intent detailIntent = new Intent(this, LinkDetailActivity.class);
-            detailIntent.putExtra(LinkDetailFragment.ARG_ITEM_ID, id);
+            detailIntent.putExtra(LinkDetailFragment.ARG_ITEM_ID, id); // Pass url here
             startActivity(detailIntent);
         }
     }

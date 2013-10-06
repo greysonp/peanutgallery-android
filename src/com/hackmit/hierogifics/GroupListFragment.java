@@ -27,7 +27,7 @@ import com.hackmit.hierogifics.json.JSONParser;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class GroupListFragment extends ListFragment
+public class GroupListFragment extends ListFragment implements JSONParser.JSONParserCallback
 {
 
     /**
@@ -78,36 +78,17 @@ public class GroupListFragment extends ListFragment
     public GroupListFragment()
     {
     }
-
+    JSONObject json = null;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        /*
-        JSONParser parser = new JSONParser();
-        JSONObject json = parser.getJSONfromUrl("EMPTY FOR NOW");
         
-        try {
-            JSONArray group = json.getJSONArray("Groups"); // Likely to be incorrect.  TODO: update with new value
-            //logic for array here
-        } catch(JSONException e) {
-            
-        }
-        */
-        ArrayList<HashMap<String, String>> groupList = new ArrayList<HashMap<String, String>>();
-        for (int i = 0; i < 4; i++){
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("name", "Test Group " + i);
-        map.put("num_comments", i + " new comments.");
-        groupList.add(map);
-        }
+        JSONParser parser = new JSONParser(this);
+        parser.execute("http://whispering-sierra-9270.herokuapp.com/?getGroups=562093799");
+        //JSONObject json = parser.getJSONfromUrl();
         
-        ListAdapter adapter = new SimpleAdapter(getActivity(), groupList, R.layout.group_item_list, 
-                new String [] {"name", "num_comments"},
-                new int [] {R.id.group_name, R.id.num_comments}
-                );
         
-        setListAdapter(adapter);
     }
 
     @Override
@@ -215,4 +196,16 @@ public class GroupListFragment extends ListFragment
         //Name        
         //New shares
     }
+
+    @Override
+    public void showList(ArrayList<HashMap<String, String>> result)
+    {              
+        ListAdapter adapter = new SimpleAdapter(getActivity(), result, R.layout.group_item_list, 
+                new String [] {"name", "newShares"},
+                new int [] {R.id.group_name, R.id.num_comments}
+                );
+        
+        setListAdapter(adapter);
+    }
+    
 }
